@@ -4,11 +4,12 @@ esp8266 AT command driver for stm32 and FreeRTOS.
 &nbsp;
 &nbsp;
 &nbsp;
-#####[Open Documenttion]( http://paulopereira98.github.io/esp8266-driver-for-STM32)
+
+### [Open Documenttion]( http://paulopereira98.github.io/esp8266-driver-for-STM32)
 &nbsp;
 ### How to use:
 
-#####Add the esp8266_CallBack() function to the usart callback: usart.c
+##### Add the esp8266_CallBack() function to the usart callback: usart.c
 ```c
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 {
@@ -19,7 +20,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 }
 ```
 
-#####Call the esp8266_init() function on startup: main.c
+##### Call the esp8266_init() function on startup: main.c
 ```c
 int main(void)
 {
@@ -62,8 +63,8 @@ int main(void)
 ```
 
 
-#####Add a task with your code.
-#####You can use this exampe as reference:
+##### Add a task with your code.
+##### You can use this exampe as reference:
 ```c
 /*freertos.c*/
 void vWifi_taskFunction(void const * argument)
