@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>es8266 driver: How to use:</title>
+<title>ccs811 driver: How to use:</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">es8266 driver
+   <div id="projectname">ccs811 driver
    </div>
   </td>
  </tr>
@@ -90,17 +90,29 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h4><a class="anchor" id="autotoc_md1"></a>
-Add the esp8266_CallBack() function to the usart callback: usart.c</h4>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)</div>
+Set the uart handler and the reset pin where the esp8266 is connected:</h4>
+<div class="fragment"><div class="line"><span class="comment">/* esp8266.h */</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Replace the reset pin with the one you are using</span></div>
+<div class="line"><span class="preprocessor">#define ESP8266_RST_Pin         GPIO_PIN_3</span></div>
+<div class="line"><span class="preprocessor">#define ESP8266_RST_GPIO_Port   GPIOD</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Replace the uart handler with the one you are using</span></div>
+<div class="line"><span class="preprocessor">#define ESP8266_UART_HANDLER    huart4</span></div>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md2"></a>
+Add the esp8266_CallBack() function to the usart callback:</h4>
+<div class="fragment"><div class="line"><span class="comment">/* usart.c */</span></div>
+<div class="line"><span class="keywordtype">void</span> HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">if</span> (huart-&gt;Instance == <a class="code" href="esp8266_8h.html#ae3fcd8065bd590bb758c86ce480c0025">ESP8266_UART_HANDLER</a>.Instance)</div>
 <div class="line">  {</div>
 <div class="line">    <a class="code" href="esp8266_8c.html#ae20b61c1385792f8ef992ce6ceae2296">esp8266_CallBack</a>(); </div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md2"></a>
-Call the esp8266_init() function on startup: main.c</h4>
-<div class="fragment"><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">void</span>)</div>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md3"></a>
+Call the esp8266_init() function on startup:</h4>
+<div class="fragment"><div class="line"><span class="comment">/* main.c */</span></div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
 <div class="line">  <span class="comment">/* USER CODE BEGIN 1 */</span></div>
 <div class="line">  <span class="comment">/* USER CODE END 1 */</span></div>
@@ -138,11 +150,11 @@ Call the esp8266_init() function on startup: main.c</h4>
 <div class="line">  }</div>
 <div class="line">  <span class="comment">/* USER CODE END 3 */</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md3"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md4"></a>
 Add a task with your code.</h4>
-<h4><a class="anchor" id="autotoc_md4"></a>
+<h4><a class="anchor" id="autotoc_md5"></a>
 You can use this exampe as reference:</h4>
-<div class="fragment"><div class="line"><span class="comment">/*freertos.c*/</span></div>
+<div class="fragment"><div class="line"><span class="comment">/* freertos.c */</span></div>
 <div class="line"><span class="keywordtype">void</span> vWifi_taskFunction(<span class="keywordtype">void</span> <span class="keyword">const</span> * argument)</div>
 <div class="line">{</div>
 <div class="line">  </div>

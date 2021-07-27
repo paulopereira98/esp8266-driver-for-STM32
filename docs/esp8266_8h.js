@@ -5,10 +5,11 @@ var esp8266_8h =
     [ "ESP8266_UART_HANDLER", "esp8266_8h.html#ae3fcd8065bd590bb758c86ce480c0025", null ],
     [ "WIFI_MAX_ERRORS", "esp8266_8h.html#a047ddff2c53e15601fe698d87df5232e", null ],
     [ "wifi_return", "esp8266_8h.html#a2dd609579aa945537451c24cbd9b46d8", [
-      [ "Add the esp8266_CallBack() function to the usart callback: usart.c", "md__r_e_a_d_m_e.html#autotoc_md1", null ],
-      [ "Call the esp8266_init() function on startup: main.c", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
-      [ "Add a task with your code.", "md__r_e_a_d_m_e.html#autotoc_md3", null ],
-      [ "You can use this exampe as reference:", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
+      [ "Set the uart handler and the reset pin where the esp8266 is connected:", "md__r_e_a_d_m_e.html#autotoc_md1", null ],
+      [ "Add the esp8266_CallBack() function to the usart callback:", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
+      [ "Call the esp8266_init() function on startup:", "md__r_e_a_d_m_e.html#autotoc_md3", null ],
+      [ "Add a task with your code.", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
+      [ "You can use this exampe as reference:", "md__r_e_a_d_m_e.html#autotoc_md5", null ],
       [ "WIFI_FAIL", "esp8266_8h.html#a2dd609579aa945537451c24cbd9b46d8a9cce1701e9dc7b7336c87217add87631", null ],
       [ "WIFI_SUCESS", "esp8266_8h.html#a2dd609579aa945537451c24cbd9b46d8a909453dd93bfe3758205aa845b48ce5b", null ]
     ] ],
