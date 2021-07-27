@@ -28,7 +28,7 @@
 
 
 //Replace the reset pin with the one you are using
-#define ESP8266_RST_Pin 			GPIO_PIN_3
+#define ESP8266_RST_Pin 		GPIO_PIN_3
 #define ESP8266_RST_GPIO_Port	GPIOD
 
 //Replace the uart handler with the one you are using

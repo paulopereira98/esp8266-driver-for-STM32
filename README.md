@@ -5,12 +5,26 @@ esp8266 AT command driver for stm32 and FreeRTOS.
 &nbsp;
 &nbsp;
 
-### [Open Documenttion](https://paulopereira98.github.io/esp8266-driver-for-STM32/esp8266_8h.html)
+### [Open Documentation](https://paulopereira98.github.io/esp8266-driver-for-STM32/esp8266_8h.html)
 &nbsp;
 ### How to use:
 
-##### Add the esp8266_CallBack() function to the usart callback: usart.c
+
+##### Set the uart handler and the reset pin where the esp8266 is connected:
 ```c
+/* esp8266.h */
+
+//Replace the reset pin with the one you are using
+#define ESP8266_RST_Pin			GPIO_PIN_3
+#define ESP8266_RST_GPIO_Port	GPIOD
+
+//Replace the uart handler with the one you are using
+#define ESP8266_UART_HANDLER  	huart4
+```
+
+##### Add the esp8266_CallBack() function to the usart callback:
+```c
+/* usart.c */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 {
   if (huart->Instance == ESP8266_UART_HANDLER.Instance)
@@ -20,8 +34,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 }
 ```
 
-##### Call the esp8266_init() function on startup: main.c
+##### Call the esp8266_init() function on startup:
 ```c
+/* main.c */
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -66,7 +81,7 @@ int main(void)
 ##### Add a task with your code.
 ##### You can use this exampe as reference:
 ```c
-/*freertos.c*/
+/* freertos.c */
 void vWifi_taskFunction(void const * argument)
 {
   
