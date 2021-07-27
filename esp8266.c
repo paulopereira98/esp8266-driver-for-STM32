@@ -16,7 +16,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 /**
- * @file esp8266.h
+ * @file esp8266.c
  * @brief esp8266 AT command driver for stm32 and FreeRTOS.
  */
 
@@ -80,7 +80,7 @@ void esp8266_reset(void)
 
 /**
   * @brief  send AT command to the ESP8266
-	* @param	cmd command string
+  * @param	cmd command string
   * @retval None
   */
 void esp8266_send_command(const char* cmd)         
@@ -91,16 +91,16 @@ void esp8266_send_command(const char* cmd)
 
 /**
   * @brief  send AT command to the ESP8266 and wait for "OK"
-	* @param	cmd			command string
-	* @param	timeout	timeout waiting for "OK"
+  * @param	cmd			command string
+  * @param	timeout	timeout waiting for "OK"
   * @retval WIFI_SUCESS or WIFI_FAIL
   */
 uint8_t esp8266_send_command_ack(const char* cmd, uint32_t timeout)         
 {
 	uint8_t cnt = 0;
 	
-  while(cnt++ < WIFI_MAX_ERRORS)
-  {
+	  while(cnt++ < WIFI_MAX_ERRORS)
+	  {
 		HAL_UART_Transmit(&ESP8266_UART_HANDLER, (uint8_t*)cmd, strlen(cmd), 100);
 		xQueueReset(xWifiOkSemaphore);
 		HAL_UART_Transmit(&ESP8266_UART_HANDLER, (uint8_t*)"\r\n", 2, 100);
@@ -108,15 +108,15 @@ uint8_t esp8266_send_command_ack(const char* cmd, uint32_t timeout)
 		
 		if( xSemaphoreTake(xWifiOkSemaphore, pdMS_TO_TICKS(timeout)) == pdTRUE  )	//wait ok
 			return WIFI_SUCESS;																											//ok found
-  }
+	  }
 	
 	return WIFI_FAIL;
 }
 
 /**
   * @brief  start TCP connection to the remote server
-	* @param ip IP or URL of the server
-	* @param port port of the server
+  * @param ip IP or URL of the server
+  * @param port port of the server
   * @retval WIFI_SUCESS or WIFI_FAIL
   */
 uint8_t esp8266_start_tcp(char* ip, uint8_t port)         
@@ -130,7 +130,7 @@ uint8_t esp8266_start_tcp(char* ip, uint8_t port)
 
 /**
   * @brief  send TCP packet to the remote server
-	* @param	packet TCP payload
+  * @param	packet TCP payload
   * @retval None
   */
 void esp8266_send_tcp(char* packet)         
@@ -170,8 +170,8 @@ uint8_t esp8266_establish_connection(char* ssid, char* pass)
 
 /**
   * @brief  POST HTTP packet 
-	* @param	ip		IP or URL of the server
-	* @param	port	Port of the server
+  * @param	ip		IP or URL of the server
+  * @param	port	Port of the server
   * @param	addr		Address to POST to
   * @param	payload	Data to POST
   * @retval WIFI_SUCESS or WIFI_FAIL
@@ -199,13 +199,13 @@ uint8_t esp8266_HTTP_post(char* ip, uint8_t port, char* addr, char* payload)
 
 /**
   * @brief  GET HTTP packet
-	* @param	ip		IP or URL of the server
-	* @param	port	port of the server
-  * @param	addr		Address to POST to
-  * @param	payload	Data to POST
-  * @param	buffer	buffer to receive data
-	* @param  size		Maximum amount of data to be received
-	* @param  timeout Timeout duration
+  * @param  ip		IP or URL of the server
+  * @param  port	port of the server
+  * @param  addr	Address to POST to
+  * @param  payload	Data to POST
+  * @param  buffer	buffer to receive data
+  * @param  size	Maximum amount of data to be received
+  * @param  timeout 	Timeout duration
   * @retval WIFI_SUCESS or WIFI_FAIL
   */
 uint8_t esp8266_HTTP_get(char* ip, uint8_t port, char* addr, char* payload, char* buffer, uint32_t size, uint32_t timeout)
